@@ -55,7 +55,7 @@ defmodule Ex03 do
 
   """
 
-  def even_or_odd(x) do
+  defp int_to_atom(x) do
     cond do
       Integer.is_even x -> :even
       Integer.is_odd  x -> :odd
@@ -63,7 +63,7 @@ defmodule Ex03 do
   end
 
   def odd_even([]),    do: []
-  def odd_even([h|t]), do: [even_or_odd(h) | odd_even(t)]
+  def odd_even([h|t]), do: [int_to_atom(h) | odd_even(t)]
 
 
   ##############################################################################
@@ -161,7 +161,29 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won(x), do: false
+  defp check_if_atom(:x), do: :x
+  defp check_if_atom(:o), do: :o
+  defp check_if_atom(x),  do: false
+
+  def won(x) do
+    case x do
+
+      #Horizontal cases (3)
+      {a, a, a, _, _, _, _, _, _} -> a
+      {_, _, _,a, a, a,  _, _, _} -> a
+      {_, _, _, _, _, _, a, a, a} -> a
+
+      #Vertical cases (3)
+      {a, _, _, a, _, _, a, _, _} -> a
+      {_, a, _, _, a, _, _, a, _} -> a
+      {_, _, a, _, _, a, _, _, a} -> a
+
+      #Diagonal cases (2)
+      {a, _, _, _, a, _, _, _, a} -> a
+      {_, _, a, _, a, _, a, _, _} -> a
+      
+    end
+  end
 
 
   ###########################
