@@ -85,7 +85,7 @@ defmodule Ex03 do
 
   """
 
-  def list_contains([], value),    do: false
+  def list_contains([], _value),    do: false
   def list_contains([h|t], value), do: h==value or list_contains(t, value)
 
   ##############################################################################
@@ -112,8 +112,8 @@ defmodule Ex03 do
 
   def list_equal([], []),           do: true
   def list_equal([h1|t1], [h2|t2]), do: h1==h2 and list_equal(t1, t2)
-  def list_equal([], a),            do: false
-  def list_equal(a, []),            do: false
+  def list_equal([], _a),           do: false
+  def list_equal(_a, []),           do: false
 
 
 
@@ -161,10 +161,6 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  defp check_if_atom(:x), do: :x
-  defp check_if_atom(:o), do: :o
-  defp check_if_atom(x),  do: false
-
   def won(x) do
     case x do
 
@@ -181,7 +177,10 @@ defmodule Ex03 do
       #Diagonal cases (2)
       {a, _, _, _, a, _, _, _, a} -> a
       {_, _, a, _, a, _, a, _, _} -> a
-      
+
+      #Any other case (no win)
+      _                           -> false
+
     end
   end
 
